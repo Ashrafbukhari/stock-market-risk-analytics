@@ -58,3 +58,63 @@ predict price direction using machine learning.
 ---
 
 ## Project Structure
+stock-market-risk-analytics/
+├── scripts/
+│ ├── 01_fetch_data.py ← pulls live data from Yahoo Finance
+│ ├── 02_cleaning.py ← cleans data + computes all metrics
+│ └── 03_charts.py ← generates all 10 charts
+├── sql/
+│ └── stock_queries.sql ← 10 SQL queries
+├── outputs/charts/ ← 10 Python charts + 4 Power BI screenshots
+└── StockMarket_Dashboard.pbix
+
+
+---
+
+## Dashboard Preview
+![Market Overview](outputs/charts/powerbi_page1_overview.png)
+![Stock Scorecard](outputs/charts/powerbi_page4_scorecard.png)
+
+---
+
+## Charts Generated
+![Risk vs Return](outputs/charts/02_risk_return_scatter.png)
+![COVID Recovery](outputs/charts/05_covid_recovery.png)
+![Monte Carlo](outputs/charts/08_monte_carlo.png)
+![ML Model](outputs/charts/09_ml_model.png)
+
+---
+
+## How to Run
+```bash
+# Install dependencies
+pip install yfinance pandas numpy matplotlib seaborn scikit-learn scipy
+
+# Fetch real data from Yahoo Finance
+python scripts/01_fetch_data.py
+
+# Clean data and compute financial metrics
+python scripts/02_cleaning.py
+
+# Generate all 10 charts
+python scripts/03_charts.py
+
+# Open dashboard
+# Load StockMarket_Dashboard.pbix in Power BI Desktop
+```
+
+---
+
+## ML Model Details
+- **Algorithm:** Random Forest Classifier (200 trees, max_depth=6)
+- **Features:** RSI-14, 1D/5D/20D returns, MA crossover signal, volatility, volume spike
+- **Split:** Chronological 80/20 — train 2019–2022, test 2023 (no data leakage)
+- **Result:** ~53% accuracy, ~0.56 AUC-ROC on genuinely unseen 2023 data
+- **Why not 90%?** Markets are semi-efficient. Honest evaluation matters more than inflated numbers.
+
+---
+
+**Author:** Ashraf Bukhari — B.Tech IT, Ganpat University 2026
+**Contact:** ashrafbukhari68@gmail.com
+**LinkedIn:** linkedin.com/in/ashraf-bukhari-31077a31a
+**Project 1:** github.com/Ashrafbukhari/retail-supply-chain-intelligence
